@@ -20,6 +20,7 @@
 #import "Challenge.h"
 #import "Challenges.h"
 #import "Scores.h"
+#import "ScoreReporter.h"
 #import "DrawUtils.h"
 #import "MainViewController.h"
 #import "ThemeListViewCell.h"
@@ -77,6 +78,8 @@
 @synthesize facebookLabel3;
 @synthesize tutorialLabel1;
 @synthesize tutorialLabel2;
+@synthesize sendIdLabel1;
+@synthesize sendIdLabel2;
 @synthesize facebookButton;
 @synthesize tutorialSwitch;
 @synthesize debugView;
@@ -117,6 +120,19 @@
     // Save tutorial setting.
     [[NSUserDefaults standardUserDefaults] setBool:(!self.tutorialSwitch.on) forKey:@"didShowHelp"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+- (IBAction)sendId:(id)sender {
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+        mailComposeViewController.mailComposeDelegate = self;
+        [mailComposeViewController setToRecipients:[NSArray arrayWithObject:NSLocalizedString(@"Mail.ID.Receiver", @"Send ID receiver.")]];
+        [mailComposeViewController setSubject:NSLocalizedString(@"Mail.ID.Subject", @"Send ID subject.")];
+        [mailComposeViewController setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"Mail.ID.Body", @"Send ID body."), [[ScoreReporter sharedInstance] deviceId]] isHTML:NO];
+        [[MainViewController sharedInstance] presentModalViewController:mailComposeViewController animated:YES];
+        [mailComposeViewController release];
+    }   
 }
 
 
@@ -305,6 +321,15 @@
 
 
 #pragma mark -
+#pragma mark MFMailComposeViewController delegate
+
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [controller dismissModalViewControllerAnimated:YES];
+}
+
+
+#pragma mark -
 #pragma mark Themes protocol
 
 
@@ -422,7 +447,9 @@
     self.facebookLabel3.font = selectFont(Camingo_Italic_14);
     self.tutorialLabel1.font = selectFont(Camingo_Bold_14);
     self.tutorialLabel2.font = selectFont(Camingo_Italic_14);
-
+    self.sendIdLabel1.font = selectFont(Camingo_Bold_14);
+    self.sendIdLabel2.font = selectFont(Camingo_Italic_14);
+    
     // Localize.
     self.aboutLabel.text = NSLocalizedString(@"Credits.EcoChallenge", @"About EcoChallenge.");
     self.fhpLabel.text = NSLocalizedString(@"Credits.FHP", @"A project of FHP.");
@@ -439,7 +466,9 @@
     self.licenseLabel.text = NSLocalizedString(@"Credits.License", @"License.");
     self.tutorialLabel1.text = NSLocalizedString(@"Tutorial.Show1", @"Show tutorial.");
     self.tutorialLabel2.text = NSLocalizedString(@"Tutorial.Show2", @"Show tutorial.");
-
+    self.sendIdLabel1.text = NSLocalizedString(@"ID.Send1", @"Send ID.");
+    self.sendIdLabel2.text = [NSString stringWithFormat:NSLocalizedString(@"ID.Send2", @"Send ID."), [[ScoreReporter sharedInstance] deviceId]];
+    
     // Set tutorial switch state.
     self.tutorialSwitch.on = ([[NSUserDefaults standardUserDefaults] boolForKey:@"didShowHelp"] == NO);
 }
@@ -489,6 +518,8 @@
     self.facebookLabel3 = nil;
     self.tutorialLabel1 = nil;
     self.tutorialLabel2 = nil;
+    self.sendIdLabel1 = nil;
+    self.sendIdLabel2 = nil;
     self.facebookButton = nil;
     self.tutorialSwitch = nil;
     self.debugView = nil;

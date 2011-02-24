@@ -35,5 +35,6 @@
 - (void)reportCalculatorResultForTheme:(NSString *)themeIdent;
 - (void)reportChallengeScoreForChallenge:(NSString *)challengeIdent;
 - (void)downloadScoresForTheme:(NSString *)themeIdent;
+- (NSString *)deviceId;
 
 @end

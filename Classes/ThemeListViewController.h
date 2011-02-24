@@ -21,7 +21,7 @@
 #import "FacebookController.h"
 
 
-@interface ThemeListViewController: UIViewController <UITableViewDataSource, UITableViewDelegate, ThemesProtocol, ThemeDownloaderProtocol, FacebookProtocol> {
+@interface ThemeListViewController: UIViewController <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ThemesProtocol, ThemeDownloaderProtocol, FacebookProtocol> {
     UITableView *tableView;
     UITableViewCell *topCell;
     UITableViewCell *creditsCell0;
@@ -47,6 +47,8 @@
     UILabel *facebookLabel3;
     UILabel *tutorialLabel1;
     UILabel *tutorialLabel2;
+    UILabel *sendIdLabel1;
+    UILabel *sendIdLabel2;
     UIButton *facebookButton;
     UISwitch *tutorialSwitch;
     UIView *debugView;
@@ -78,6 +80,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *facebookLabel3;
 @property (nonatomic, retain) IBOutlet UILabel *tutorialLabel1;
 @property (nonatomic, retain) IBOutlet UILabel *tutorialLabel2;
+@property (nonatomic, retain) IBOutlet UILabel *sendIdLabel1;
+@property (nonatomic, retain) IBOutlet UILabel *sendIdLabel2;
 @property (nonatomic, retain) IBOutlet UIButton *facebookButton;
 @property (nonatomic, retain) IBOutlet UISwitch *tutorialSwitch;
 @property (nonatomic, retain) IBOutlet UIView *debugView;
@@ -88,5 +92,6 @@
 - (IBAction)showSourceCode:(id)sender;
 - (IBAction)facebookConnect:(id)sender;
 - (IBAction)changeTutorialSetting:(id)sender;
+- (IBAction)sendId:(id)sender;
 
 @end

@@ -225,6 +225,10 @@
 		86BBCA07129FC810008B59EE /* stripes.png in Resources */ = {isa = PBXBuildFile; fileRef = 86BBC9F3129FC810008B59EE /* stripes.png */; };
 		86BBCA08129FC810008B59EE /* stripes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86BBC9F4129FC810008B59EE /* stripes@2x.png */; };
 		86BBCB58129FF762008B59EE /* Scores.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BBCB57129FF762008B59EE /* Scores.m */; };
+		86C67705130BEDB600DFE4E5 /* button-mailid-default.png in Resources */ = {isa = PBXBuildFile; fileRef = 86C67701130BEDB600DFE4E5 /* button-mailid-default.png */; };
+		86C67706130BEDB600DFE4E5 /* button-mailid-default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86C67702130BEDB600DFE4E5 /* button-mailid-default@2x.png */; };
+		86C67707130BEDB600DFE4E5 /* button-mailid-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 86C67703130BEDB600DFE4E5 /* button-mailid-highlight.png */; };
+		86C67708130BEDB600DFE4E5 /* button-mailid-highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86C67704130BEDB600DFE4E5 /* button-mailid-highlight@2x.png */; };
 		86D44CB11289D21000A162B9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86D44CB01289D21000A162B9 /* Localizable.strings */; };
 		86DB7D4712B0F9AA00B07340 /* Realtime.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DB7D4612B0F9AA00B07340 /* Realtime.m */; };
 		86E0071B129B237000900064 /* ChallengeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E0071A129B237000900064 /* ChallengeViewController.m */; };
@@ -558,6 +562,10 @@
 		86BBC9F4129FC810008B59EE /* stripes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stripes@2x.png"; path = "Images/stripes@2x.png"; sourceTree = "<group>"; };
 		86BBCB56129FF762008B59EE /* Scores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scores.h; path = Classes/Scores.h; sourceTree = "<group>"; };
 		86BBCB57129FF762008B59EE /* Scores.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scores.m; path = Classes/Scores.m; sourceTree = "<group>"; };
+		86C67701130BEDB600DFE4E5 /* button-mailid-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-mailid-default.png"; path = "Images/button-mailid-default.png"; sourceTree = "<group>"; };
+		86C67702130BEDB600DFE4E5 /* button-mailid-default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-mailid-default@2x.png"; path = "Images/button-mailid-default@2x.png"; sourceTree = "<group>"; };
+		86C67703130BEDB600DFE4E5 /* button-mailid-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-mailid-highlight.png"; path = "Images/button-mailid-highlight.png"; sourceTree = "<group>"; };
+		86C67704130BEDB600DFE4E5 /* button-mailid-highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-mailid-highlight@2x.png"; path = "Images/button-mailid-highlight@2x.png"; sourceTree = "<group>"; };
 		86D44CB21289D21900A162B9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		86DB7D4512B0F9AA00B07340 /* Realtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Realtime.h; path = Classes/Realtime.h; sourceTree = "<group>"; };
 		86DB7D4612B0F9AA00B07340 /* Realtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Realtime.m; path = Classes/Realtime.m; sourceTree = "<group>"; };
@@ -952,6 +960,10 @@
 				865B443112D47D9F0037D1D3 /* button-license-default@2x.png */,
 				865B443212D47D9F0037D1D3 /* button-license-highlight.png */,
 				865B443312D47D9F0037D1D3 /* button-license-highlight@2x.png */,
+				86C67701130BEDB600DFE4E5 /* button-mailid-default.png */,
+				86C67702130BEDB600DFE4E5 /* button-mailid-default@2x.png */,
+				86C67703130BEDB600DFE4E5 /* button-mailid-highlight.png */,
+				86C67704130BEDB600DFE4E5 /* button-mailid-highlight@2x.png */,
 				86F2BDDC12B8E7CD001D6261 /* button-plus-default.png */,
 				86F2BDDD12B8E7CD001D6261 /* button-plus-default@2x.png */,
 				86F2BDDE12B8E7CD001D6261 /* button-plus-highlight.png */,
@@ -1379,6 +1391,10 @@
 				8690773912DE209B00BDFFD1 /* button-ecochallenge-highlight.png in Resources */,
 				8690773A12DE209B00BDFFD1 /* button-ecochallenge-highlight@2x.png in Resources */,
 				8690775712DE24EC00BDFFD1 /* Email.html in Resources */,
+				86C67705130BEDB600DFE4E5 /* button-mailid-default.png in Resources */,
+				86C67706130BEDB600DFE4E5 /* button-mailid-default@2x.png in Resources */,
+				86C67707130BEDB600DFE4E5 /* button-mailid-highlight.png in Resources */,
+				86C67708130BEDB600DFE4E5 /* button-mailid-highlight@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1481,7 +1497,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COMPRESS_PNG_FILES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
@@ -1545,7 +1561,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
@@ -1606,7 +1622,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COMPRESS_PNG_FILES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_PASCAL_STRINGS = NO;

@@ -137,6 +137,11 @@ static ScoreReporter *sharedInstance = nil;
 }
 
 
+- (NSString *)deviceId {
+    return md5([[UIDevice currentDevice] uniqueIdentifier]);
+}
+
+
 - (void)enqueue:(NSString *)action withIdent:(NSString *)ident {
     // Avoid duplicates. Use placeholders instead of removing objectes so self.uploadingRange remains valid.
     if ([action isEqualToString:@"apns"]) {
@@ -183,7 +188,7 @@ static ScoreReporter *sharedInstance = nil;
     NSMutableString *param = [NSMutableString stringWithCapacity:4096];
 
     // Append anonymized device ID to URL-encoded string.
-    [param appendFormat:@"device=%@", md5([[UIDevice currentDevice] uniqueIdentifier])];
+    [param appendFormat:@"device=%@", [self deviceId]];
 
     if (self.downloadThemeScores) {
         // Append theme filter to URL-encoded string.

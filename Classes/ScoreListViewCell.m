@@ -232,7 +232,7 @@
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
         mailComposeViewController.mailComposeDelegate = self;
-        [mailComposeViewController setSubject:NSLocalizedString(@"Mail.Subject", @"Email subject.")];
+        [mailComposeViewController setSubject:NSLocalizedString(@"Mail.Invite.Subject", @"Invitation subject.")];
         [mailComposeViewController setMessageBody:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Email" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL] isHTML:YES];
         [[MainViewController sharedInstance] presentModalViewController:mailComposeViewController animated:YES];
         [mailComposeViewController release];

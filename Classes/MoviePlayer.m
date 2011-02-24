@@ -25,6 +25,7 @@
 @property (nonatomic, retain) MPMoviePlayerController *moviePlayerController;
 
 - (void)moviePlaybackDidFinish:(NSNotification *)notification;
+- (void)moviePlayerLoadStateDidChange:(NSNotification *)notification;
 
 @end
 
@@ -54,6 +55,7 @@ static MoviePlayer *sharedInstance = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil]; 
     if ([[[UIDevice currentDevice] systemVersion] compare:@"3.2" options:NSNumericSearch] != NSOrderedAscending) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackDidFinish:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerLoadStateDidChange:) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
     }
     
     // Show modal view.
@@ -61,6 +63,7 @@ static MoviePlayer *sharedInstance = nil;
     
     // Rotate to landscape.
     [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationLandscapeRight;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackTranslucent;
     self.view.bounds = CGRectMake(0, 0, 480, 320);
     self.view.center = CGPointMake(160, 240);
     self.view.transform = CGAffineTransformMakeRotation(M_PI / 2);
@@ -75,7 +78,7 @@ static MoviePlayer *sharedInstance = nil;
         moviePlayerController.fullscreen = YES;
     }
     if ([self.moviePlayerController respondsToSelector:@selector(setControlStyle:)]) {
-        moviePlayerController.controlStyle = MPMovieControlStyleFullscreen;
+        moviePlayerController.controlStyle = MPMovieControlStyleNone;
     }    
     [moviePlayerController play];
 }
@@ -98,7 +101,14 @@ static MoviePlayer *sharedInstance = nil;
     self.moviePlayerController = nil;
     [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationPortrait;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
+    [UIApplication sharedApplication].statusBarHidden = NO;
     [self dismissModalViewControllerAnimated:NO];
+}
+
+
+- (void)moviePlayerLoadStateDidChange:(NSNotification *)notification {
+    // Initially no controls are shown. But we enable them afterwards.
+    moviePlayerController.controlStyle = MPMovieControlStyleFullscreen;
 }
 
 
