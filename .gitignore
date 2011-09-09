@@ -1,5 +1,7 @@
 .DS_Store
+.LSOverride
 *.swp
-build/
 *.pbxuser
 *.mode1v3
+*.xcuserdatad
+build/

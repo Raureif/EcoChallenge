@@ -80,7 +80,7 @@ static NetworkActivity *sharedInstance = nil;
 }
 
 
-- (void)release {
+- (oneway void)release {
     // Do nothing.
 }
 

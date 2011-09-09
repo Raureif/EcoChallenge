@@ -128,13 +128,12 @@
 }
 
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
+- (id)initWithDictionary:(NSDictionary *)dictionary locale:(NSString *)locale {
     if ((self = [super init])) {
 
         // Create date formatter.
         NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-        NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
-        [dateFormatter setLocale:locale];
+        [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease]];
         [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Europe/Berlin"]];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
 
@@ -182,7 +181,11 @@
         } else {
             // Create identifier and path name from start date and version.
             self.ident = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.dateRange.from]];
-            self.path = [NSString stringWithFormat:@"%@v%u", self.ident, self.version];
+            if ([locale isEqualToString:@"de"]) {
+                self.path = [NSString stringWithFormat:@"%@v%u", self.ident, self.version];
+            } else {
+                self.path = [NSString stringWithFormat:@"%@v%u-%@", self.ident, self.version, locale];
+            }
         }
     }
     return self;
@@ -212,7 +215,7 @@
 
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@: %@ (v%u)", self.dateRange, self.title, self.version];
+    return [NSString stringWithFormat:@"%@: %@ (%@)", self.dateRange, self.title, self.path];
 }
 
 

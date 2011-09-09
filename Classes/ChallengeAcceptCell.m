@@ -170,7 +170,7 @@
     // cell insertion of the ScoreListViewController uses gray, too. But because the UITableView
     // should have a black background, the top cell (i.e. this cell) draws a black area outside
     // its view.
-    self.blackArea = [[UIView alloc] initWithFrame:CGRectMake(0, -240, self.bounds.size.width, 240)];
+    self.blackArea = [[[UIView alloc] initWithFrame:CGRectMake(0, -240, self.bounds.size.width, 240)] autorelease];
     self.blackArea.backgroundColor = [UIColor blackColor];
     [self addSubview:self.blackArea];
 }

@@ -17,7 +17,7 @@
 //
 
 
-extern NSString *const EcoChallengeClockDidChangeNotficiation;
+extern NSString *const EcoChallengeClockDidChangeNotification;
 
 
 #pragma mark -

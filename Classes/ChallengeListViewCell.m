@@ -196,7 +196,9 @@
     } else if (self.challengeState != ChallengeStateTeaser) {
         image = [UIImage imageNamed:@"arrow-fwd-default.png"];
     }
-    [image drawInRect:CGRectMake(SIDE_OFFSET + 277, topOffset + 21, image.size.width, image.size.height)];
+    if (image) {
+        [image drawInRect:CGRectMake(SIDE_OFFSET + 277, topOffset + 21, image.size.width, image.size.height)];
+    }
 
     // Draw icon.
     if (self.challengeState == ChallengeStateTeaser) {
@@ -230,8 +232,6 @@
     NSString *str = nil;
     if (self.challengeState == ChallengeStateTeaser) {
         NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-        // Remove the next line as soon as the application becomes localized.
-        formatter.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"de_DE"] autorelease];
         NSArray *weekdays = [formatter standaloneWeekdaySymbols];
         NSInteger weekday = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:self.globalDateRange.from].weekday - 1;
         str = [NSString stringWithFormat:NSLocalizedString(@"Challenge.FromDay", @"Weekday when next challenge starts."), [weekdays objectAtIndex:weekday]];

@@ -67,27 +67,24 @@
 
 
 - (NSString *)description {
-    /*
-     * Use this iOS 4 dependent code as soon as the application becomes localized.
-
-     // Use current locale for date.
-     NSString *fromFormat = [NSDateFormatter dateFormatFromTemplate:(fromYear == toYear ? @"Md" : @"yMd") options:0 locale:[NSLocale currentLocale]];
-     NSString *toFormat = [NSDateFormatter dateFormatFromTemplate:@"yMd" options:0 locale:[NSLocale currentLocale]];
-     NSDateFormatter *fromFormatter = [[[NSDateFormatter alloc] init] autorelease];
-     [fromFormatter setDateFormat:fromFormat];
-     NSDateFormatter *toFormatter = [[[NSDateFormatter alloc] init] autorelease];
-     [toFormatter setDateFormat:toFormat];
-
-     */
-
     NSInteger fromYear = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:self.from].year;
     NSInteger toYear = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:self.to].year;
-
+    
     NSDateFormatter *fromFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [fromFormatter setDateFormat:(fromYear == toYear ? NSLocalizedString(@"iOS3.VeryShortDateFormat", @"day.month.") : NSLocalizedString(@"iOS3.ShortDateFormat", @"day.month.year"))];
     NSDateFormatter *toFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [toFormatter setDateFormat:NSLocalizedString(@"iOS3.ShortDateFormat", @"day.month.year")];
 
+    if ([NSDateFormatter respondsToSelector:@selector(dateFormatFromTemplate:options:locale:)]) {
+        // Use current locale for date.
+        NSString *fromFormat = [NSDateFormatter dateFormatFromTemplate:(fromYear == toYear ? @"Md" : @"yMd") options:0 locale:[NSLocale currentLocale]];
+        NSString *toFormat = [NSDateFormatter dateFormatFromTemplate:@"yMd" options:0 locale:[NSLocale currentLocale]];
+        [fromFormatter setDateFormat:fromFormat];
+        [toFormatter setDateFormat:toFormat];
+    } else {
+        // Fallback for iOS 3.
+        [fromFormatter setDateFormat:(fromYear == toYear ? NSLocalizedString(@"iOS3.VeryShortDateFormat", @"day.month.") : NSLocalizedString(@"iOS3.ShortDateFormat", @"day.month.year"))];
+        [toFormatter setDateFormat:NSLocalizedString(@"iOS3.ShortDateFormat", @"day.month.year")];
+    }
+    
     return [NSString stringWithFormat:NSLocalizedString(@"DateRange", @"From start date to end date."), [fromFormatter stringFromDate:self.from], [toFormatter stringFromDate:self.to]];
 }
 

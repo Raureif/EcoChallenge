@@ -717,7 +717,7 @@ static MainViewController *sharedInstance = nil;
 }
 
 
-- (void)release {
+- (oneway void)release {
     // Do nothing.
 }
 

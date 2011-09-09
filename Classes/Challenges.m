@@ -110,7 +110,7 @@
         self.themeIdent = theme.ident;
 
         // Register for clock change events.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clockDidChange:) name:EcoChallengeClockDidChangeNotficiation object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clockDidChange:) name:EcoChallengeClockDidChangeNotification object:nil];
     }
     return self;
 }
@@ -227,7 +227,7 @@
 
 - (void)dealloc {
     // We do not want to get informed about clock change events anymore.
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EcoChallengeClockDidChangeNotficiation object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EcoChallengeClockDidChangeNotification object:nil];
     self.allChallenges = nil;
     self.delegate = nil;
     self.themeIdent = nil;

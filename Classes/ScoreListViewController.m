@@ -474,8 +474,6 @@
     if (self.type == ScoreListViewControllerTypeAchievements) {
         // Set text of UILabel.
         NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
-        // Remove the next line as soon as the application becomes localized.
-        formatter.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"de_DE"] autorelease];
         [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
         self.worldwideChallengesLabel.text = [formatter stringForObjectValue:[NSNumber numberWithUnsignedInt:worldwideChallenges]];
     }

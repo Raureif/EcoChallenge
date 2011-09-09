@@ -95,12 +95,13 @@
     }
 
     // Draw tip label.
+    CGFloat tipWidth;
     if (self.drawHighlighted) {
-        drawLabel(CGPointMake(SIDE_OFFSET + 12, 9), 50, Camingo_Bold_17,
-                  [UIColor blackColor], 1, [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Challenge.Tip", @"Tip.")]);
+        tipWidth = drawLabel(CGPointMake(SIDE_OFFSET + 12, 9), 50, Camingo_Bold_17,
+                             [UIColor blackColor], 1, [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Challenge.Tip", @"Tip.")]);
     } else {
-        drawShadowedLabel(CGPointMake(SIDE_OFFSET + 12, 9), 50, Camingo_Bold_17,
-                          [UIColor whiteColor], [UIColor colorWithWhite:0 alpha:0.5], 1, [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Challenge.Tip", @"Tip.")]);
+        tipWidth = drawShadowedLabel(CGPointMake(SIDE_OFFSET + 12, 9), 50, Camingo_Bold_17,
+                                     [UIColor whiteColor], [UIColor colorWithWhite:0 alpha:0.5], 1, [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Challenge.Tip", @"Tip.")]);
     }
 
     // Draw recommendation label.
@@ -111,7 +112,7 @@
         // Do not use Georgia here because it is not baseline-aligned to the tip label.
         font = Camingo_Bold_17;
     }
-    drawShadowedLabel(CGPointMake(SIDE_OFFSET + 58, 9), 214, font,
+    drawShadowedLabel(CGPointMake(SIDE_OFFSET + tipWidth + 21, 9), 251 - tipWidth, font,
                       (self.drawHighlighted ? [UIColor blackColor] : [UIColor whiteColor]),
                       (self.drawHighlighted ? nil : [UIColor colorWithWhite:0 alpha:0.5]),
                       1, self.recommendation);

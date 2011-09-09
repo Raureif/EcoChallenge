@@ -19,7 +19,7 @@
 #import "Realtime.h"
 
 
-NSString *const EcoChallengeClockDidChangeNotficiation = @"EcoChallengeClockDidChangeNotficiation";
+NSString *const EcoChallengeClockDidChangeNotification = @"EcoChallengeClockDidChangeNotification";
 
 
 #pragma mark -
@@ -65,11 +65,6 @@ static Realtime *sharedInstance = nil;
 
         // Start timer.
         sharedInstance.timer = [NSTimer scheduledTimerWithTimeInterval:(5 * 60) target:sharedInstance selector:@selector(timerCallback) userInfo:nil repeats:YES];
-        
-#if defined(SANDBOX) && !defined(DEBUG)
-        // Start simuation immediately.
-        [sharedInstance simulateOneDay];
-#endif
     }
     return sharedInstance;
 }
@@ -114,7 +109,7 @@ static Realtime *sharedInstance = nil;
 
 
 - (void)timerCallback {
-    [[NSNotificationCenter defaultCenter] postNotificationName:EcoChallengeClockDidChangeNotficiation object:self.date];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EcoChallengeClockDidChangeNotification object:self.date];
 }
 
 
@@ -168,7 +163,7 @@ static Realtime *sharedInstance = nil;
 }
 
 
-- (void)release {
+- (oneway void)release {
     // Do nothing.
 }
 

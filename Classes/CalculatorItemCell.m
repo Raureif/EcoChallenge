@@ -184,8 +184,6 @@
     if (self.editing == NO) {
         // Draw count string.
         NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
-        // Remove the next line as soon as the application becomes localized.
-        formatter.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"de_DE"] autorelease];
         [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
         drawLabelAligned(CGPointMake(offset - 2, 7), 80, Camingo_Bold_20, [UIColor colorWithWhite:0.2 alpha:1], 1, [formatter stringForObjectValue:[NSNumber numberWithUnsignedInt:self.count]], UITextAlignmentRight);
     }

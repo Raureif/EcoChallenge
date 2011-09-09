@@ -50,6 +50,18 @@ BOOL FBIsDeviceIPad(void) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+// Forward declarations to silence compiler warnings.
+@interface FBDialog ()
+
+- (void)bounce2AnimationStopped;
+- (void)deviceOrientationDidChange:(void*)object;
+- (void)keyboardWillShow:(NSNotification*)notification;
+- (void)keyboardWillHide:(NSNotification*)notification;
+
+@end
+
+
 @implementation FBDialog
 
 @synthesize delegate = _delegate,
@@ -137,14 +149,14 @@ BOOL FBIsDeviceIPad(void) {
   CGColorSpaceRelease(space);
 }
 
-- (BOOL)shouldRotateToOrientation:(UIDeviceOrientation)orientation {
+- (BOOL)shouldRotateToOrientation:(UIInterfaceOrientation)orientation {
   if (orientation == _orientation) {
     return NO;
   } else {
-    return orientation == UIDeviceOrientationLandscapeLeft
-      || orientation == UIDeviceOrientationLandscapeRight
-      || orientation == UIDeviceOrientationPortrait
-      || orientation == UIDeviceOrientationPortraitUpsideDown;
+    return orientation == UIInterfaceOrientationLandscapeLeft
+      || orientation == UIInterfaceOrientationLandscapeRight
+      || orientation == UIInterfaceOrientationPortrait
+      || orientation == UIInterfaceOrientationPortraitUpsideDown;
   }
 }
 
@@ -298,7 +310,7 @@ BOOL FBIsDeviceIPad(void) {
   if ((self = [super initWithFrame:CGRectZero])) {
     _delegate = nil;
     _loadingURL = nil;
-    _orientation = UIDeviceOrientationUnknown;
+    _orientation = [UIApplication sharedApplication].statusBarOrientation;
     _showingKeyboard = NO;
 
     self.backgroundColor = [UIColor clearColor];
@@ -450,7 +462,7 @@ BOOL FBIsDeviceIPad(void) {
 // UIDeviceOrientationDidChangeNotification
 
 - (void)deviceOrientationDidChange:(void*)object {
-  UIDeviceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+  UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
   if (!_showingKeyboard && [self shouldRotateToOrientation:orientation]) {
     [self updateWebOrientation];
 

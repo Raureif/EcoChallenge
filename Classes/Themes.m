@@ -6,12 +6,12 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
+// 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-//
+// 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -58,9 +58,10 @@
 @synthesize version;
 @synthesize connection;
 @synthesize responseData;
+@synthesize locale;
 
 
-#define DOWNLOAD_URL       @"http://update.eco-challenge.eu/github/themes-de.plist"
+#define DOWNLOAD_URL       @"http://update.eco-challenge.eu/github/themes-%@.plist"
 #define MAX_DOWNLOAD_SIZE  (512 * 1024)
 #define CACHE_AGE          (60 * 60)
 
@@ -73,6 +74,13 @@ static Themes *sharedInstance = nil;
 
         // Create singleton object.
         sharedInstance = [[Themes alloc] init];
+        
+        // Determine user language.
+        if ([[NSLocale preferredLanguages] count] > 0 && [[[NSLocale preferredLanguages] objectAtIndex:0] hasPrefix:@"de"]) {
+            sharedInstance.locale = @"de";
+        } else {
+            sharedInstance.locale = @"en";
+        }
 
         // Read themes from flash.
         [sharedInstance readThemesFromFlash];
@@ -83,7 +91,7 @@ static Themes *sharedInstance = nil;
         }
 
         // Register for clock change events.
-        [[NSNotificationCenter defaultCenter] addObserver:sharedInstance selector:@selector(clockDidChange:) name:EcoChallengeClockDidChangeNotficiation object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:sharedInstance selector:@selector(clockDidChange:) name:EcoChallengeClockDidChangeNotification object:nil];
 
         // Start update check.
         [sharedInstance clockDidChange:nil];
@@ -164,7 +172,7 @@ static Themes *sharedInstance = nil;
 
         // Create request.
         self.responseData = [NSMutableData data];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:DOWNLOAD_URL]];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:DOWNLOAD_URL, self.locale]]];
         [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
         [request setTimeoutInterval:15];
         [[NetworkActivity sharedInstance] logURL:request.URL];
@@ -199,9 +207,9 @@ static Themes *sharedInstance = nil;
 - (void)readThemesFromFlash {
     // Choose theme list file either from home directory or from bundle.
     NSString *file = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
-                      stringByAppendingPathComponent: @"Themes.plist"];
+                      stringByAppendingPathComponent:[NSString stringWithFormat:@"Themes-%@.plist", self.locale]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:file] == NO) {
-        file = [[NSBundle mainBundle] pathForResource:@"Themes" ofType:@"plist"];
+        file = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"Themes-%@", self.locale] ofType:@"plist"];
     }
 
     // Read dictionary file.
@@ -224,7 +232,7 @@ static Themes *sharedInstance = nil;
             for (NSUInteger i = 0; i < themesEntries.count; i++) {
                 NSDictionary *themeDictionary = [themesEntries objectAtIndex:i];
                 if ([themeDictionary isKindOfClass:[NSDictionary class]]) {
-                    Theme *theme = [[Theme alloc] initWithDictionary:themeDictionary];
+                    Theme *theme = [[Theme alloc] initWithDictionary:themeDictionary locale:self.locale];
                     // Test if dictionary has been valid.
                     if (theme) {
                         // No two equal themes with the same start date and version must exist.
@@ -312,7 +320,7 @@ static Themes *sharedInstance = nil;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 #ifdef DEBUG
-    NSLog(@"Cannot download file themes-de.plist: %@", [error localizedDescription]);
+    NSLog(@"Cannot download file themes-%@.plist: %@", self.locale, [error localizedDescription]);
 #endif
     // Clean up.
     [self closeConnection];
@@ -347,7 +355,7 @@ static Themes *sharedInstance = nil;
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
 #ifdef DEBUG
-        NSLog(@"Cannot download file themes-de.plist: Unsupported file format.");
+        NSLog(@"Cannot download file themes-%@.plist: Unsupported file format.", self.locale);
 #endif
     }
 
@@ -356,7 +364,7 @@ static Themes *sharedInstance = nil;
 
         // Store downloaded file.
         NSString *file = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
-                          stringByAppendingPathComponent: @"Themes.plist"];
+                          stringByAppendingPathComponent:[NSString stringWithFormat:@"Themes-%@.plist", self.locale]];
         if ([plist writeToFile:file atomically:YES]) {
             // Re-read themes list from flash.
             [self readThemesFromFlash];
@@ -365,7 +373,7 @@ static Themes *sharedInstance = nil;
             [self.delegate refreshThemeList:self.themes];
 
         } else {
-            NSLog(@"Error: Cannot overwrite file Themes.plist.");
+            NSLog(@"Error: Cannot overwrite file Themes-%@.plist.", self.locale);
         }
     }
 }
@@ -400,7 +408,7 @@ static Themes *sharedInstance = nil;
 }
 
 
-- (void)release {
+- (oneway void)release {
     // Do nothing.
 }
 

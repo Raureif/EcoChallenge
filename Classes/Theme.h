@@ -60,7 +60,7 @@ typedef enum {
 
 - (void)setIsTeaser:(BOOL)aIsTeaser;
 - (void)setIsDownloading:(BOOL)aIsDownloading;
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (id)initWithDictionary:(NSDictionary *)dictionary locale:(NSString *)locale;
 - (NSComparisonResult)compare:(Theme *)aTheme;
 
 @end

@@ -25,8 +25,6 @@
 @property (nonatomic, assign, readwrite) NSUInteger to;
 @property (nonatomic, copy, readwrite) NSArray *colors;
 
-static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth, float ovalHeight);
-
 @end
 
 

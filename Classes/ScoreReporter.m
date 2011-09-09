@@ -138,7 +138,20 @@ static ScoreReporter *sharedInstance = nil;
 
 
 - (NSString *)deviceId {
-    return md5([[UIDevice currentDevice] uniqueIdentifier]);
+    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];
+    if ([deviceId length] != 32) {
+        if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)]) {
+            deviceId = md5([[UIDevice currentDevice] uniqueIdentifier]);
+        } else {
+            CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+            CFStringRef str = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+            CFRelease(uuid);
+            deviceId = md5([NSMakeCollectable(str) autorelease]);
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    return deviceId;
 }
 
 
@@ -188,7 +201,7 @@ static ScoreReporter *sharedInstance = nil;
     NSMutableString *param = [NSMutableString stringWithCapacity:4096];
 
     // Append anonymized device ID to URL-encoded string.
-    [param appendFormat:@"device=%@", [self deviceId]];
+    [param appendFormat:@"device=%@&lang=%@", [self deviceId], [Themes sharedInstance].locale];
 
     if (self.downloadThemeScores) {
         // Append theme filter to URL-encoded string.
@@ -289,11 +302,6 @@ static ScoreReporter *sharedInstance = nil;
 
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification {
-    // If necessary, re-authenticate local player.
-    if (self.hasGameCenter) {
-        [sharedInstance playerAuthenticationDidChange:nil];
-    }
-
     // If the queue is not empty, start new request.
     if ([self.queue count] > 0) {
         [self startUpload];
@@ -520,7 +528,7 @@ NSString *md5(NSString *input) {
 }
 
 
-- (void)release {
+- (oneway void)release {
     // Do nothing.
 }
 

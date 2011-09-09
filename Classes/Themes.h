@@ -34,12 +34,14 @@
     NSInteger version;
     NSURLConnection *connection;
     NSMutableData *responseData;
+    NSString *locale;
 }
 
 + (Themes *)sharedInstance;
 
 @property (nonatomic, assign) id <ThemesProtocol> delegate;
 @property (nonatomic, readonly) NSArray *themes;
+@property (nonatomic, copy) NSString *locale;
 
 // Usually the update check is performed automatically. With this method the update check is enforced.
 - (void)checkForUpdatesNow;

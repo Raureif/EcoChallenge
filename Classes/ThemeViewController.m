@@ -78,7 +78,7 @@
         self.dateRange = theme.dateRange;
 
         // Register for clock change events.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clockDidChange:) name:EcoChallengeClockDidChangeNotficiation object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clockDidChange:) name:EcoChallengeClockDidChangeNotification object:nil];
 
         // Read file Theme.plist.
         NSDictionary *themeDict = [[NSDictionary dictionaryWithContentsOfFile:theme.dictionaryPath] objectForKey:@"theme"];

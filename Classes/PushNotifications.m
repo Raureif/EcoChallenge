@@ -175,7 +175,7 @@ static PushNotifications *sharedInstance = nil;
 }
 
 
-- (void)release {
+- (oneway void)release {
     // Do nothing.
 }
 

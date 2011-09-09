@@ -14,5 +14,7 @@
 	<string></string>
 	<key>didShowHelp</key>
 	<false/>
+	<key>deviceId</key>
+	<string></string>
 </dict>
 </plist>

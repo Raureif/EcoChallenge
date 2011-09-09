@@ -384,8 +384,6 @@
                                               NSLocalizedString(@"Scores.Accomplished", @"Accomplished."), UITextAlignmentRight);
             // Draw number of challenges string.
             NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
-            // Remove the next line as soon as the application becomes localized.
-            formatter.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"de_DE"] autorelease];
             [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
             drawLabelAligned(CGPointMake(offset - 4, 8), 80, Rooney_Bold_17, [UIColor whiteColor], 1,
                              [formatter stringForObjectValue:[self.values objectAtIndex:1]], UITextAlignmentRight);
@@ -409,8 +407,6 @@
                                       [UIColor colorWithWhite:1 alpha:([[self.values objectAtIndex:1] unsignedIntValue] > 0 ? 1 : 0)], 1, [self.values objectAtIndex:2], UITextAlignmentRight);
             // Draw count string.
             formatter = [[[NSNumberFormatter alloc] init] autorelease];
-            // Remove the next line as soon as the application becomes localized.
-            formatter.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"de_DE"] autorelease];
             [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
             drawLabelAligned(CGPointMake(offset - 2, 7), 80, Camingo_Bold_20, [UIColor whiteColor], 1,
                              ([[self.values objectAtIndex:1] unsignedIntValue] > 0 ? [formatter stringForObjectValue:[self.values objectAtIndex:0]] : @"-"), UITextAlignmentRight);
