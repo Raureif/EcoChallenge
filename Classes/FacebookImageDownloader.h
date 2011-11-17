@@ -28,7 +28,7 @@
 
 
 // Singleton object.
-@interface FacebookImageDownloader: NSObject {
+@interface FacebookImageDownloader: NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate> {
     NSObject<FacebookImageDownloaderProtocol> *delegate;
     NSString *currentFacebookID;
     NSMutableArray *downloadQueue;

@@ -46,7 +46,7 @@ typedef enum {
     ScoreListViewControllerType type;
     ScoreListViewControllerState state;
     UITableView *tableView;
-    NSUInteger section;
+    NSInteger section;
     NSArray *privateFriends;
     NSArray *challengeIdents;
     UIImage *backgroundTexture;

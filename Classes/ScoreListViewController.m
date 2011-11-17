@@ -25,7 +25,7 @@
 
 @property (nonatomic, assign) ScoreListViewControllerType type;
 @property (nonatomic, assign) ScoreListViewControllerState state;
-@property (nonatomic, assign) NSUInteger section;
+@property (nonatomic, assign) NSInteger section;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, copy) NSArray *privateFriends;
 @property (nonatomic, retain) UIWebView *webView;

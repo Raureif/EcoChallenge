@@ -18,7 +18,7 @@
 
 
 // Singleton object.
-@interface ScoreReporter: NSObject {
+@interface ScoreReporter: NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate> {
     NSString *queueFilename;
     NSMutableArray *queue;
     NSRange uploadingRange;

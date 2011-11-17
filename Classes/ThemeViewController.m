@@ -290,7 +290,7 @@
             NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:[self.imagemap count]];
             for (NSUInteger i = 0; i < [self.imagemap count]; i++) {
                 NSDictionary *buttonDict = [self.imagemap objectAtIndex:i];
-                if ([[buttonDict objectForKey:@"stripe"] unsignedIntValue] == indexPath.row) {
+                if ([[buttonDict objectForKey:@"stripe"] integerValue] == indexPath.row) {
                     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
                     button.frame = CGRectMake([[buttonDict objectForKey:@"x"] unsignedIntValue],
                                               [[buttonDict objectForKey:@"y"] unsignedIntValue],

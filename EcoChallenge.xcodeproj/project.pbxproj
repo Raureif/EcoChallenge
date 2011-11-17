@@ -262,7 +262,7 @@
 		86F1A4B81277211900D0CBDE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 86F1A4B01277211900D0CBDE /* unzip.c */; };
 		86F1A4B91277211900D0CBDE /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 86F1A4B21277211900D0CBDE /* zip.c */; };
 		86F1A4BA1277211900D0CBDE /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86F1A4B51277211900D0CBDE /* ZipArchive.mm */; };
-		86F1A4D01277216600D0CBDE /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F1A4CE1277214D00D0CBDE /* libz.1.2.3.dylib */; };
+		86F1A4D01277216600D0CBDE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F1A4CE1277214D00D0CBDE /* libz.dylib */; };
 		86F1A4DD127722F000D0CBDE /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F1A4DC127722F000D0CBDE /* Themes.m */; };
 		86F1A55F1277329400D0CBDE /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F1A55E1277329400D0CBDE /* Theme.m */; };
 		86F1A5641277344E00D0CBDE /* DateRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F1A5631277344E00D0CBDE /* DateRange.m */; };
@@ -633,7 +633,7 @@
 		86F1A4B31277211900D0CBDE /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zip.h; path = ZipArchive/zip.h; sourceTree = "<group>"; };
 		86F1A4B41277211900D0CBDE /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipArchive.h; path = ZipArchive/ZipArchive.h; sourceTree = "<group>"; };
 		86F1A4B51277211900D0CBDE /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ZipArchive.mm; path = ZipArchive/ZipArchive.mm; sourceTree = "<group>"; };
-		86F1A4CE1277214D00D0CBDE /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		86F1A4CE1277214D00D0CBDE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		86F1A4DB127722F000D0CBDE /* Themes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Themes.h; path = Classes/Themes.h; sourceTree = "<group>"; };
 		86F1A4DC127722F000D0CBDE /* Themes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Themes.m; path = Classes/Themes.m; sourceTree = "<group>"; };
 		86F1A55D1277329400D0CBDE /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Theme.h; path = Classes/Theme.h; sourceTree = "<group>"; };
@@ -684,7 +684,7 @@
 			files = (
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				86F1A4D01277216600D0CBDE /* libz.1.2.3.dylib in Frameworks */,
+				86F1A4D01277216600D0CBDE /* libz.dylib in Frameworks */,
 				861770B81278A9FA00D0B848 /* CoreGraphics.framework in Frameworks */,
 				861770E31278AA0F00D0B848 /* GameKit.framework in Frameworks */,
 				864E480212824CCE004B62AD /* SystemConfiguration.framework in Frameworks */,
@@ -817,7 +817,7 @@
 				861770B71278A9FA00D0B848 /* CoreGraphics.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				861770E21278AA0F00D0B848 /* GameKit.framework */,
-				86F1A4CE1277214D00D0CBDE /* libz.1.2.3.dylib */,
+				86F1A4CE1277214D00D0CBDE /* libz.dylib */,
 				8699F18712EDBE83008594D3 /* MediaPlayer.framework */,
 				86FA64FD12DA0133007406D9 /* MessageUI.framework */,
 				864E480112824CCE004B62AD /* SystemConfiguration.framework */,
@@ -1740,10 +1740,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COMPRESS_PNG_FILES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
@@ -1802,11 +1805,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
@@ -1851,7 +1857,6 @@
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1862,11 +1867,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COMPRESS_PNG_FILES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_PASCAL_STRINGS = NO;

@@ -28,7 +28,7 @@
 
 
 // Singleton object.
-@interface Themes: NSObject {
+@interface Themes: NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate> {
     NSArray *allThemes;
     id <ThemesProtocol> delegate;
     NSInteger version;

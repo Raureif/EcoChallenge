@@ -30,7 +30,7 @@
 
 
 // Singleton object.
-@interface ThemeDownloader: NSObject {
+@interface ThemeDownloader: NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate> {
     id <ThemeDownloaderProtocol> delegate;
     Theme *downloadingTheme;
     NSMutableArray *downloadQueue;
