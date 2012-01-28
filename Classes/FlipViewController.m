@@ -64,6 +64,8 @@
 - (void)show:(UIViewController *)aParentViewController {
     NSAssert(self.isShown == NO, @"FlipView is already shown.");
 
+    // *** This code will not be executed on iOS 5.
+    
     // Retain ourself until WebKit has loaded its content and our view is displayed modally.
     [self retain];
     // Force loading of view. WebKit will start loading its content.
@@ -74,7 +76,7 @@
 
 
 - (IBAction)close:(id)sender {
-    [self.parentViewController dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
     self.parentViewController.view.userInteractionEnabled = YES;
     self.parentViewController = nil;
 }
@@ -85,11 +87,14 @@
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    if (self.isShown == NO) {
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] != NSOrderedAscending) {
+        self.webView.hidden = NO;
+    } else if (self.isShown == NO) {
         self.isShown = YES;
         // Show flip view after WebKit has loaded its content.
         [self.parentViewController presentModalViewController:self animated:YES];
         [self release]; // c.f. method show.
+        self.webView.hidden = NO;
     }
 }
 
@@ -123,6 +128,9 @@
     }
 
     self.titleLabel.text = self.title;
+    self.webView.opaque = NO;
+    self.webView.hidden = YES;
+    self.webView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 

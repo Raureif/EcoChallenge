@@ -595,10 +595,15 @@ static MainViewController *sharedInstance = nil;
 - (void)showFlipView:(NSURL *)url title:(NSString *)title backgroundColor:(UIColor *)backgroundColor gradient:(Gradient *)gradient {
     // Test if URL points to an existing file.
     if ([url isFileURL] && [[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
-        // Show flip view.
         FlipViewController *flipViewController = [[FlipViewController alloc] initWithURL:url title:title backgroundColor:backgroundColor gradient:gradient];
-        self.view.userInteractionEnabled = NO;
-        [flipViewController show:self];
+        if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] != NSOrderedAscending) {
+            // Show flip view immediately.
+            [self presentModalViewController:flipViewController animated:YES];
+        } else {
+            // Show flip view after the slow UIWebView has loaded its content. Unfortunately this crashes on iOS 5.
+            self.view.userInteractionEnabled = NO;
+            [flipViewController show:self];
+        }
         [flipViewController release];
     }
 }
