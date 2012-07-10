@@ -653,11 +653,33 @@ static MainViewController *sharedInstance = nil;
     if (self.viewDidLoadForTheFirstTime == NO) {
         self.viewDidLoadForTheFirstTime = YES;
 
-        // Select the first available theme.
+        // Select the first available theme with an open challenge.
         for (Theme *theme in [Themes sharedInstance].themes) {
             if (theme.state == ThemeStateReady) {
-                self.selectedTheme = theme;
-                break;
+                Challenges *challenges = [[[Challenges alloc] initWithTheme:theme] autorelease];
+                for (Challenge *challenge in challenges.challenges) {
+                    if (challenge.state == ChallengeStateRunning) {
+                        self.selectedTheme = theme;
+                        break;
+                    }
+                }
+                if (self.selectedTheme) {
+                    break;
+                }
+            }
+        }
+        
+        // Select a random theme.
+        if (self.selectedTheme == nil) {
+            NSMutableArray *readyThemes = [NSMutableArray arrayWithCapacity:[Themes sharedInstance].themes.count];
+            for (Theme *theme in [Themes sharedInstance].themes) {
+                if (theme.state == ThemeStateReady) {
+                    [readyThemes addObject:theme];
+                }
+            }
+            if (readyThemes.count > 0) {
+                NSUInteger index = random() % readyThemes.count;
+                self.selectedTheme = [readyThemes objectAtIndex:index];
             }
         }
 

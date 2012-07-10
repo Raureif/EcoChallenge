@@ -140,14 +140,11 @@ static ScoreReporter *sharedInstance = nil;
 - (NSString *)deviceId {
     NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];
     if ([deviceId length] != 32) {
-        if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)]) {
-            deviceId = md5([[UIDevice currentDevice] uniqueIdentifier]);
-        } else {
-            CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-            CFStringRef str = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-            CFRelease(uuid);
-            deviceId = md5([NSMakeCollectable(str) autorelease]);
-        }
+        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+        CFStringRef str = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        CFRelease(uuid);
+        deviceId = md5([NSMakeCollectable(str) autorelease]);
+        
         [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
